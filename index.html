@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Melissa · Sedation Drill</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --teal:    #0d7a6a;
+    --teal2:   #0a5e52;
+    --teal-lt: #e6f7f5;
+    --teal-md: #a8ddd8;
+    --navy:    #0f1f2e;
+    --slate:   #1e3040;
+    --text:    #1a2a3a;
+    --muted:   #5a7080;
+    --border:  #d4e4e0;
+    --bg:      #f4faf9;
+    --white:   #ffffff;
+    --red:     #d93025;
+    --green:   #0d7a6a;
+    --amber:   #c07a00;
+    --card-shadow: 0 2px 20px rgba(13,122,106,0.10), 0 1px 4px rgba(0,0,0,0.06);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--navy);
+    padding: 0 24px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .nav-badge {
+    width: 32px; height: 32px;
+    background: var(--teal);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+  .nav-name {
+    font-family: 'DM Serif Display', serif;
+    color: #fff;
+    font-size: 18px;
+    letter-spacing: 0.02em;
+  }
+  .nav-sub {
+    color: var(--teal-md);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .nav-tabs {
+    display: flex;
+    gap: 4px;
+  }
+  .nav-tab {
+    padding: 6px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.15s;
+    color: #94a3b8;
+    background: transparent;
+  }
+  .nav-tab.active, .nav-tab:hover {
+    background: rgba(13,122,106,0.25);
+    color: var(--teal-md);
+  }
+  .nav-tab.active { color: #fff; background: var(--teal); }
+
+  /* ── PAGES ── */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* ── HOME ── */
+  .home-hero {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--slate) 60%, #1a3a35 100%);
+    padding: 48px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .home-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 120%, rgba(13,122,106,0.3) 0%, transparent 70%);
+  }
+  .hero-emoji { font-size: 52px; margin-bottom: 12px; position: relative; }
+  .hero-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(28px, 6vw, 40px);
+    color: #fff;
+    margin-bottom: 6px;
+    position: relative;
+  }
+  .hero-role {
+    color: var(--teal-md);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    position: relative;
+    margin-bottom: 4px;
+  }
+  .hero-date {
+    color: #4a7a70;
+    font-size: 12px;
+    position: relative;
+  }
+
+  .home-body { padding: 24px 20px; max-width: 640px; margin: 0 auto; }
+
+  .stat-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 22px;
+  }
+  .stat-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 14px 10px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border);
+  }
+  .stat-num { font-size: 28px; font-weight: 700; color: var(--teal); line-height: 1; }
+  .stat-lbl { font-size: 10px; color: var(--muted); font-weight: 500; margin-top: 4px; text-transform: uppercase; letter-spacing: 0.05em; }
+
+  .section-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .cat-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .cat-btn {
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 2px solid var(--border);
+    background: var(--white);
+    cursor: pointer;
+    text-align: left;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    transition: all 0.15s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .cat-btn:hover { border-color: var(--teal-md); color: var(--teal); }
+  .cat-btn.selected { border-color: var(--teal); background: var(--teal-lt); color: var(--teal); }
+  .cat-count { font-size: 11px; opacity: 0.7; }
+
+  .action-row { display: flex; gap: 10px; margin-bottom: 14px; }
+  .btn-primary {
+    flex: 1;
+    padding: 15px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    background: var(--teal);
+    color: #fff;
+    transition: all 0.15s;
+    box-shadow: 0 4px 14px rgba(13,122,106,0.3);
+  }
+  .btn-primary:hover { background: var(--teal2); transform: translateY(-1px); }
+  .btn-secondary {
+    flex: 1;
+    padding: 15px;
+    border-radius: 12px;
+    border: 2px solid var(--border);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    background: var(--white);
+    color: var(--text);
+    transition: all 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--teal); color: var(--teal); }
+
+  .tip-box {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 12px;
+    color: #92400e;
+    line-height: 1.6;
+  }
+
+  /* ── QUIZ ── */
+  .quiz-body { padding: 20px; max-width: 640px; margin: 0 auto; }
+
+  .progress-bar-wrap {
+    background: var(--border);
+    border-radius: 4px;
+    height: 5px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--teal), #0fa891);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+
+  .quiz-toprow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+  }
+  .quiz-counter { font-size: 13px; font-weight: 600; color: var(--muted); }
+  .quiz-cat-badge {
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    background: var(--teal-lt);
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .score-strip {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .score-pill {
+    flex: 1;
+    text-align: center;
+    padding: 7px 4px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .score-pill.correct  { background: #dcfce7; color: #166534; }
+  .score-pill.missed   { background: #fee2e2; color: #991b1b; }
+  .score-pill.skipped  { background: #fef3c7; color: #92400e; }
+
+  .card {
+    background: var(--white);
+    border-radius: 18px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    margin-bottom: 14px;
+    animation: slideUp 0.25s ease;
+  }
+  @keyframes slideUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card-header {
+    background: var(--teal);
+    padding: 10px 18px;
+  }
+  .card-header-label {
+    font-size: 10px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .card-body { padding: 20px 20px 16px; }
+  .card-question {
+    font-family: 'DM Serif Display', serif;
+    font-size: 19px;
+    line-height: 1.45;
+    color: var(--text);
+    margin-bottom: 18px;
+  }
+
+  .hint-box {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    color: #92400e;
+    line-height: 1.5;
+  }
+
+  .reveal-btn {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: 2px solid var(--teal);
+    background: var(--teal-lt);
+    color: var(--teal);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .reveal-btn:hover { background: var(--teal); color: #fff; }
+
+  .answer-box {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 12px;
+    padding: 16px;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #166534;
+    font-weight: 500;
+    margin-bottom: 16px;
+    animation: fadeIn 0.2s ease;
+  }
+  @keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+
+  .verdict-label {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .verdict-row { display: flex; gap: 8px; padding: 0 20px 20px; }
+  .verdict-btn {
+    flex: 1;
+    padding: 12px 6px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    transition: all 0.15s;
+  }
+  .verdict-btn.got-it   { background: #166534; color: #fff; }
+  .verdict-btn.missed   { background: #991b1b; color: #fff; }
+  .verdict-btn.skip     { background: #94a3b8; color: #fff; }
+  .verdict-btn:hover    { opacity: 0.85; transform: translateY(-1px); }
+
+  .hint-toggle {
+    width: 100%;
+    padding: 11px;
+    border-radius: 10px;
+    border: 2px solid #fde68a;
+    background: #fefce8;
+    color: #92400e;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  /* ── RESULTS ── */
+  .results-body { padding: 24px 20px; max-width: 540px; margin: 0 auto; text-align: center; }
+  .results-hero {
+    background: linear-gradient(135deg, var(--navy), var(--slate));
+    border-radius: 20px;
+    padding: 28px 20px;
+    margin-bottom: 20px;
+    color: #fff;
+  }
+  .results-emoji { font-size: 52px; margin-bottom: 8px; }
+  .results-title { font-family: 'DM Serif Display', serif; font-size: 24px; margin-bottom: 4px; }
+  .results-grade { color: var(--teal-md); font-size: 13px; }
+  .results-pct { font-size: 58px; font-weight: 800; margin: 10px 0; }
+  .pct-great  { color: #4ade80; }
+  .pct-ok     { color: #fbbf24; }
+  .pct-low    { color: #f87171; }
+
+  .results-grid {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+  .results-tile {
+    border-radius: 12px;
+    padding: 16px 10px;
+    text-align: center;
+  }
+  .results-tile .num { font-size: 30px; font-weight: 800; line-height: 1; }
+  .results-tile .lbl { font-size: 11px; margin-top: 4px; }
+  .tile-green { background: #f0fdf4; }
+  .tile-green .num { color: #166534; }
+  .tile-green .lbl { color: #15803d; }
+  .tile-red   { background: #fef2f2; }
+  .tile-red .num   { color: #991b1b; }
+  .tile-red .lbl   { color: #dc2626; }
+  .tile-amber { background: #fffbeb; }
+  .tile-amber .num { color: #92400e; }
+  .tile-amber .lbl { color: #d97706; }
+
+  /* ── BROWSE ── */
+  .browse-body { padding: 20px; max-width: 680px; margin: 0 auto; }
+  .browse-controls {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 14px;
+    flex-wrap: wrap;
+  }
+  .search-input {
+    flex: 1;
+    min-width: 160px;
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .search-input:focus { border-color: var(--teal); }
+  .filter-select {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1.5px solid var(--border);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    background: #fff;
+    color: var(--text);
+    cursor: pointer;
+  }
+  .browse-count { font-size: 12px; color: var(--muted); margin-bottom: 12px; }
+
+  .qa-item {
+    background: var(--white);
+    border-radius: 14px;
+    border: 2px solid var(--border);
+    margin-bottom: 8px;
+    overflow: hidden;
+    transition: border-color 0.15s;
+  }
+  .qa-item.open { border-color: var(--teal); }
+  .qa-toggle {
+    width: 100%;
+    padding: 14px 16px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .qa-q-wrap { flex: 1; }
+  .qa-cat-badge {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 20px;
+    background: var(--teal-lt);
+    color: var(--teal);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 5px;
+  }
+  .qa-q-text {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.4;
+  }
+  .qa-chevron { color: var(--teal); font-size: 16px; margin-top: 2px; flex-shrink: 0; }
+  .qa-answer {
+    padding: 0 16px 16px;
+  }
+  .qa-answer-box {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 12px 14px;
+    font-size: 13px;
+    color: #166534;
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+  .qa-hint-box {
+    background: #fffbeb;
+    border: 1px solid #fde68a;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #92400e;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 480px) {
+    .cat-grid { grid-template-columns: 1fr; }
+    .action-row { flex-direction: column; }
+    .nav-sub { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-badge">🦷</div>
+    <div>
+      <div class="nav-name">Melissa</div>
+      <div class="nav-sub">Clinical Assistant · Sedation Drill</div>
+    </div>
+  </div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showPage('home')">Home</button>
+    <button class="nav-tab" onclick="showPage('browse')">Browse</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════ HOME ══════════════════════════ -->
+<div id="page-home" class="page active">
+  <div class="home-hero">
+    <div class="hero-emoji">💉</div>
+    <h1 class="hero-title">Melissa's Sedation Drill</h1>
+    <div class="hero-role">Clinical Assistant · Chairside Role</div>
+    <div class="hero-date">Florida Moderate IV Sedation · Inspection Prep</div>
+  </div>
+  <div class="home-body">
+    <div class="stat-row" id="homeStats"></div>
+    <div class="section-label">Select a Category</div>
+    <div class="cat-grid" id="catGrid"></div>
+    <div class="action-row">
+      <button class="btn-primary" onclick="startQuiz()">🃏 Start Flashcard Drill</button>
+      <button class="btn-secondary" onclick="showPage('browse')">📚 Browse All</button>
+    </div>
+    <div class="tip-box">
+      💡 <strong>Drill tip:</strong> Say your answers out loud before revealing. The doctor will ask you verbally during the inspection. Know the drugs by name and know exactly where they are.
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ QUIZ ══════════════════════════ -->
+<div id="page-quiz" class="page">
+  <div class="quiz-body">
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+    </div>
+    <div class="quiz-toprow">
+      <span class="quiz-counter" id="quizCounter">1 / 0</span>
+      <span class="quiz-cat-badge" id="quizCatBadge">—</span>
+    </div>
+    <div class="score-strip">
+      <div class="score-pill correct">✓ <span id="sCorrect">0</span></div>
+      <div class="score-pill missed">✗ <span id="sMissed">0</span></div>
+      <div class="score-pill skipped">~ <span id="sSkipped">0</span></div>
+    </div>
+    <div class="card" id="quizCard">
+      <div class="card-header">
+        <div class="card-header-label" id="cardHeaderLabel">Question</div>
+      </div>
+      <div class="card-body">
+        <div class="card-question" id="cardQuestion">—</div>
+        <div class="hint-box" id="hintBox" style="display:none"></div>
+        <button class="reveal-btn" id="revealBtn" onclick="revealAnswer()">👁 Reveal Answer</button>
+        <div class="answer-box" id="answerBox" style="display:none"></div>
+        <div class="verdict-label" id="verdictLabel" style="display:none">How did you do?</div>
+      </div>
+      <div class="verdict-row" id="verdictRow" style="display:none">
+        <button class="verdict-btn got-it"  onclick="record('correct')">✓ Got It</button>
+        <button class="verdict-btn missed"  onclick="record('missed')">✗ Missed</button>
+        <button class="verdict-btn skip"    onclick="record('skipped')">~ Skip</button>
+      </div>
+    </div>
+    <button class="hint-toggle" id="hintToggle" onclick="toggleHint()">💡 Show Hint</button>
+    <button class="btn-secondary" style="width:100%;margin-top:10px;" onclick="showPage('home')">← Back to Home</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════ RESULTS ══════════════════════════ -->
+<div id="page-results" class="page">
+  <div class="results-body">
+    <div class="results-hero">
+      <div class="results-emoji" id="resEmoji">🏆</div>
+      <div class="results-title">Quiz Complete!</div>
+      <div class="results-grade" id="resGrade">—</div>
+      <div class="results-pct" id="resPct">—</div>
+    </div>
+    <div class="results-grid">
+      <div class="results-tile tile-green">
+        <div class="num" id="resCor">0</div>
+        <div class="lbl">Correct</div>
+      </div>
+      <div class="results-tile tile-red">
+        <div class="num" id="resMis">0</div>
+        <div class="lbl">Missed</div>
+      </div>
+      <div class="results-tile tile-amber">
+        <div class="num" id="resSki">0</div>
+        <div class="lbl">Skipped</div>
+      </div>
+    </div>
+    <div class="action-row">
+      <button class="btn-primary" onclick="startQuiz()">🔄 Retry</button>
+      <button class="btn-secondary" onclick="showPage('home')">🏠 Home</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════ BROWSE ══════════════════════════ -->
+<div id="page-browse" class="page">
+  <div class="browse-body">
+    <div style="display:flex;align-items:center;gap:12px;margin-bottom:16px;">
+      <button class="btn-secondary" style="flex:0;padding:8px 14px;font-size:13px;" onclick="showPage('home')">← Home</button>
+      <h2 style="font-family:'DM Serif Display',serif;font-size:20px;color:var(--text);">Browse All Q&amp;A</h2>
+    </div>
+    <div class="browse-controls">
+      <input class="search-input" id="searchInput" placeholder="🔍 Search questions..." oninput="renderBrowse()"/>
+      <select class="filter-select" id="filterSelect" onchange="renderBrowse()">
+        <option value="all">All Topics</option>
+        <option value="emergency">🚨 Emergencies</option>
+        <option value="drugs">💊 Drugs</option>
+        <option value="airway">🫁 Airway</option>
+        <option value="equipment">🔧 Equipment</option>
+        <option value="routine">📋 Routine Duties</option>
+      </select>
+    </div>
+    <div class="browse-count" id="browseCount">— questions</div>
+    <div id="browseList"></div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+//  DATA
+// ═══════════════════════════════════════════════════════════
+const CATS = {
+  emergency: "🚨 Emergencies",
+  drugs:     "💊 Drugs",
+  airway:    "🫁 Airway",
+  equipment: "🔧 Equipment",
+  routine:   "📋 Routine",
+};
+
+const QA = [
+  // ── ROUTINE ──────────────────────────────────────────────
+  {id:1,cat:"routine",
+   q:"What are your duties BEFORE each sedation case?",
+   a:"1) Equipment check: O2 primary+backup, suction primary+backup, BVM, AED. 2) Drug kit: all drugs present, unexpired, organized — know every location by memory. 3) IV setup staged (tourniquet, catheter, tubing, tape, flush). 4) All monitors set up (pulse ox, capnograph, BP cuff, precordial stethoscope). 5) Emergency drug kit within arm's reach of the chair.",
+   hint:"5 steps: equipment, drugs, IV setup, monitors, kit placement."},
+  {id:2,cat:"routine",
+   q:"Where do you stay during the entire sedation procedure?",
+   a:"At chairside at all times. You never leave the patient. Nicole handles documentation, 911, and the AED. You stay at the chair and assist the doctor.",
+   hint:"Chairside. Always. Nicole handles the outside."},
+  {id:3,cat:"routine",
+   q:"What is your only job when the doctor calls for a drug?",
+   a:"Locate the correct drug immediately, retrieve it, and hand the labeled vial to the doctor. The doctor draws it up. You never draw up or administer a drug yourself.",
+   hint:"Locate → hand the vial. Doctor draws it up. Never draw up yourself."},
+  {id:4,cat:"routine",
+   q:"What monitoring equipment must be ready and running before sedation begins?",
+   a:"Pulse oximeter (SpO2), capnograph (ETCO2/end-tidal CO2), blood pressure cuff, and precordial stethoscope. All must be functional and connected before the patient is seated.",
+   hint:"Pulse ox + capnograph + BP cuff + precordial stethoscope."},
+  {id:5,cat:"routine",
+   q:"What IV supplies must be staged before the case?",
+   a:"Tourniquet, IV catheter (appropriate gauge), IV tubing, tape, and saline flush — all staged and ready for the doctor before the patient is seated.",
+   hint:"Tourniquet, catheter, tubing, tape, flush."},
+
+  // ── EMERGENCIES ──────────────────────────────────────────
+  {id:10,cat:"emergency",
+   q:"AIRWAY OBSTRUCTION — what do you do?",
+   a:"Have tonsil suction on and in hand immediately. Hand McGill forceps to doctor if object may be visible. Have BVM ready to hand. Hand appropriate oral or nasal airway on doctor's call. Hold O2 mask on patient while doctor acts. Assist repositioning if instructed.",
+   hint:"Suction on → McGill forceps → BVM ready → airway sizes on call."},
+  {id:11,cat:"emergency",
+   q:"BRONCHOSPASM — what is the first drug you hand the doctor?",
+   a:"Albuterol inhaler — shake it first, then hand it. If escalating and not responding: Epinephrine 1:1000 vial. Then Solu-Medrol (methylprednisolone) vial as corticosteroid support. Hold 100% O2 mask on patient while doctor draws up any drug.",
+   hint:"Albuterol first (shaken). Then Epi 1:1000 if severe. Solu-Medrol secondary."},
+  {id:12,cat:"emergency",
+   q:"ASPIRATION OF FOREIGN OBJECT — what are your immediate actions?",
+   a:"Activate suction immediately — tonsil tip in patient's mouth. Hand McGill forceps to doctor. Have BVM ready. Assist repositioning to left lateral decubitus if instructed.",
+   hint:"Suction → McGill → BVM → left lateral position."},
+  {id:13,cat:"emergency",
+   q:"ANGINA PECTORIS — what do you hand the doctor and in what order?",
+   a:"1) Nitroglycerin (SL tablet or spray). 2) Aspirin 325 mg for patient to chew. Assist sitting patient upright. Hold O2 mask on patient.",
+   hint:"Nitro first, then Aspirin. Sit patient up. Hold O2 mask."},
+  {id:14,cat:"emergency",
+   q:"MYOCARDIAL INFARCTION — what do you do?",
+   a:"Hand Aspirin 325 mg to doctor. Hand Nitroglycerin if BP is adequate. Hold O2 mask. Prepare IV setup if not already running. Stay at chair — be ready to assist CPR if arrest occurs. Nicole calls 911.",
+   hint:"Aspirin → Nitro if BP ok → O2 mask → IV ready → ready for CPR."},
+  {id:15,cat:"emergency",
+   q:"HYPOTENSION — how do you position the patient and what drug do you hand?",
+   a:"Recline chair and elevate legs immediately (Trendelenburg position). Open IV fluids wide on doctor's direction. Hand Ephedrine vial to doctor.",
+   hint:"Trendelenburg (legs up) + Ephedrine vial + open IV fluids."},
+  {id:16,cat:"emergency",
+   q:"HYPERTENSIVE CRISIS — what drug do you hand the doctor?",
+   a:"Hand Labetalol vial to doctor first. Hand Nitroglycerin if doctor requests for cardiac symptoms. Keep patient calm and minimize stimulation.",
+   hint:"Labetalol vial first. Nitro if cardiac symptoms. Keep calm."},
+  {id:17,cat:"emergency",
+   q:"CARDIAC ARREST — what is your role while Nicole runs the AED?",
+   a:"Begin or assist CPR immediately if directed by doctor (100–120/min, 2 inch depth — do not stop). Hand Epinephrine vial to doctor for IV push. Hand Amiodarone vial if VF/VT persists after shocks. Stay at the chair — Nicole runs the AED.",
+   hint:"CPR quality → Epi vial → Amiodarone vial if needed. Stay at chair."},
+  {id:18,cat:"emergency",
+   q:"ANAPHYLAXIS — what is the FIRST drug you hand and why?",
+   a:"Epinephrine 1:1000 vial IMMEDIATELY — this is always the first-line treatment for anaphylaxis. Then open IV fluids wide. Hand Diphenhydramine (Benadryl) vial. Hand Solu-Medrol vial. Hold O2 mask or assist BVM if patient is not breathing adequately.",
+   hint:"Epi 1:1000 FIRST. Always. Then Benadryl, then Solu-Medrol."},
+  {id:19,cat:"emergency",
+   q:"SEIZURE — what do you do and when do you hand the anticonvulsant?",
+   a:"Do NOT restrain patient. Protect from injury — pad sides of chair. Turn to lateral position to protect airway. Suction at bedside. Hand Midazolam (Versed) or Diazepam (Valium) vial to doctor if seizure lasts more than 2 minutes. Have BVM ready for post-ictal respiratory depression.",
+   hint:"No restraint → lateral position → Versed/Valium at >2 min → BVM ready after."},
+  {id:20,cat:"emergency",
+   q:"HYPOGLYCEMIA — what do you give if the patient is unconscious?",
+   a:"Hand D50W (50% dextrose) vial or prefilled syringe to doctor for IV push. If patient is conscious: provide oral glucose or juice directly.",
+   hint:"Unconscious = D50W IV. Conscious = oral glucose. Simple."},
+  {id:21,cat:"emergency",
+   q:"SYNCOPE — what is your first action?",
+   a:"Recline chair immediately into Trendelenburg position (legs up, head down). Hold 100% O2 mask on patient. Have IV fluids ready. Hand smelling salts/ammonia inhalant if available.",
+   hint:"Trendelenburg immediately. O2 mask. Fluids ready."},
+  {id:22,cat:"emergency",
+   q:"RESPIRATORY DEPRESSION / APNEA — what two reversal agents and what do you do?",
+   a:"Stimulate patient (sternal rub, verbal). Have BVM ready — assist ventilation if doctor is drawing up a drug. Hand Flumazenil vial (reverses benzodiazepines). Hand Naloxone vial (reverses opioids). Assist jaw thrust and mask seal while doctor administers reversal agents.",
+   hint:"BVM ready → Flumazenil (benzos) → Naloxone (opioids). Assist jaw thrust."},
+  {id:23,cat:"emergency",
+   q:"LARYNGOSPASM — how is this different from bronchospasm and what do you do?",
+   a:"Laryngospasm is a spasm of the vocal cords (upper airway closure) — distinct from bronchospasm which is lower airway. Signs: high-pitched stridor or complete silence with no airflow despite breathing effort, dropping SpO2. Your actions: jaw thrust and continuous positive airway pressure (CPAP) via tight BVM seal — this is often enough to break it. Hand Succinylcholine vial to doctor if it doesn't resolve (low-dose 0.1–0.2 mg/kg IV to break spasm). 100% O2. Suction if secretions present. Be ready with full airway kit.",
+   hint:"Stridor or silent chest + SpO2 drop = laryngospasm. BVM jaw thrust first. Succinylcholine vial if not resolving."},
+  {id:24,cat:"emergency",
+   q:"EMESIS AND ASPIRATION — what are your immediate actions?",
+   a:"Turn patient immediately to lateral (recovery) position to prevent further aspiration. Suction aggressively — tonsil suction in mouth immediately. Stop the procedure. 100% O2. Have BVM ready. Monitor SpO2 and breath sounds — unilateral decreased sounds = aspiration. Keep patient positioned laterally. Doctor will assess need for bronchoscopy or hospital transfer. Call 911 if SpO2 not maintaining.",
+   hint:"Lateral position immediately. Suction aggressively. O2. Call 911 if SpO2 dropping."},
+  {id:25,cat:"emergency",
+   q:"PHLEBITIS — what are the signs and your actions?",
+   a:"Phlebitis = inflammation of the vein at or near the IV site. Signs: redness, warmth, swelling, tenderness, or a palpable cord along the vein. Your actions: alert the doctor immediately. Do NOT continue infusing through that site. Doctor will discontinue the IV and restart at a new site. Apply warm compress to the affected area. Document: site, appearance, time identified. Monitor for signs of infection or thrombophlebitis progression.",
+   hint:"Red, warm, tender, swollen vein = phlebitis. Stop infusing. Doctor restarts IV. Warm compress. Document."},
+  {id:26,cat:"emergency",
+   q:"INTRA-ARTERIAL INJECTION — what are the signs and what do you do?",
+   a:"Signs: sudden severe burning or pain at injection site, blanching or mottling of the hand/fingers, bright red blood pulsating back into tubing, loss of pulse distal to injection site. This is a serious emergency — arterial spasm and potential tissue loss. Your actions: alert doctor IMMEDIATELY. Do NOT inject any more drug. Do NOT remove the needle/catheter yet (doctor may need to inject vasodilator through it). Have emergency medications ready. Call 911. Document everything with exact times.",
+   hint:"Severe burning pain + pulsating bright red blood + pale hand = intra-arterial. STOP injection. Don't remove needle. Call 911."},
+  {id:27,cat:"emergency",
+   q:"HYPERVENTILATION / HYPOVENTILATION — how do you tell them apart and what do you do for each?",
+   a:"Hyperventilation: rapid shallow breathing, RR >20, patient may feel tingling/lightheadedness, SpO2 usually OK, ETCO2 low (<35). Actions: calm reassurance, instruct slow breathing, rebreather mask if conscious and anxious. Hypoventilation: slow shallow breathing, RR <10, SpO2 dropping, ETCO2 rising (>50) or absent. Actions: stimulate patient, jaw thrust, BVM positive pressure ventilation, hand Flumazenil or Naloxone vial to doctor if sedation-induced, call 911 if not responding.",
+   hint:"Hyperventilation: fast + low ETCO2 → calm + slow breathing. Hypoventilation: slow + dropping SpO2 → stimulate + BVM + reversal agents."},
+  {id:28,cat:"emergency",
+   q:"CARDIAC ARRHYTHMIAS (non-arrest) — what are your actions when the monitor shows an abnormal rhythm?",
+   a:"Alert the doctor immediately and point to the monitor. Stay at chairside. Check patient responsiveness and pulse — if no pulse, treat as cardiac arrest. For bradycardia with symptoms: hand Atropine vial to doctor. For tachycardia (SVT): hand Adenosine vial. For VT with pulse: hand Amiodarone vial. For any arrhythmia causing instability (low BP, altered mental status): have defibrillator/AED ready — Nicole brings AED. Document rhythm, time, vitals, and all drugs given. Call 911 for any sustained arrhythmia not immediately resolving.",
+   hint:"Alert doctor + point to monitor. Check pulse. Bradycardia → Atropine. SVT → Adenosine. VT with pulse → Amiodarone. AED ready."},
+
+  // ── DRUGS ─────────────────────────────────────────────────
+  {id:30,cat:"drugs",
+   q:"What drug do you hand FIRST for anaphylaxis and what concentration?",
+   a:"Epinephrine 1:1000 — for intramuscular injection into the lateral thigh. This is always the first-line treatment. You hand the vial; the doctor draws it up and administers it.",
+   hint:"Epi 1:1000 (IM). First. Every time."},
+  {id:31,cat:"drugs",
+   q:"What is the difference between Epinephrine 1:1000 and 1:10,000 and when is each used?",
+   a:"1:1000 (stronger concentration) = for IM injection during anaphylaxis (0.3–0.5 mg). 1:10,000 (more dilute) = for IV use during cardiac arrest (1 mg). Know which vial is which in the emergency kit.",
+   hint:"1:1000 = IM for anaphylaxis. 1:10,000 = IV for cardiac arrest."},
+  {id:32,cat:"drugs",
+   q:"What do Flumazenil and Naloxone reverse respectively?",
+   a:"Flumazenil reverses benzodiazepines (e.g. Versed/Midazolam, Valium). Naloxone (Narcan) reverses opioids. Both are used in respiratory depression or apnea. You hand the vials to the doctor.",
+   hint:"Flumazenil = benzos. Naloxone = opioids."},
+  {id:33,cat:"drugs",
+   q:"What drug do you hand for low blood pressure (hypotension) under sedation?",
+   a:"Ephedrine vial — this is the vasopressor of choice for sedation-related hypotension. Also open IV fluids wide and place patient in Trendelenburg.",
+   hint:"Ephedrine for hypotension. Plus Trendelenburg + fluids."},
+  {id:34,cat:"drugs",
+   q:"What drug do you hand for a hypertensive crisis?",
+   a:"Labetalol vial — the antihypertensive of choice. Also have Nitroglycerin ready if the doctor asks for it (if cardiac symptoms are present).",
+   hint:"Labetalol for hypertensive crisis."},
+  {id:35,cat:"drugs",
+   q:"What drug do you hand for a seizure lasting more than 2 minutes?",
+   a:"Midazolam (Versed) vial or Diazepam (Valium) vial — these are the anticonvulsants. Hand whichever is in your kit.",
+   hint:"Versed or Valium — anticonvulsants for seizures >2 min."},
+  {id:36,cat:"drugs",
+   q:"What is Solu-Medrol and when is it used?",
+   a:"Solu-Medrol (methylprednisolone) is a corticosteroid. It is used as secondary treatment in anaphylaxis and in bronchospasm. You hand the vial to the doctor after the first-line drug (Epi for anaphylaxis, Albuterol for bronchospasm).",
+   hint:"Solu-Medrol = corticosteroid. Secondary in anaphylaxis and bronchospasm."},
+  {id:37,cat:"drugs",
+   q:"What drug do you hand for a patient in cardiac arrest with persistent VF/VT after shocks?",
+   a:"Amiodarone vial — 300 mg IV bolus. This is the antiarrhythmic for refractory ventricular fibrillation or pulseless VT. Hand it to the doctor while maintaining CPR.",
+   hint:"Amiodarone for VF/VT that won't respond to shocks."},
+  {id:38,cat:"drugs",
+   q:"What is D50W and when do you use it?",
+   a:"D50W is 50% Dextrose — the antihypoglycemic agent. Used for an unconscious hypoglycemic patient. You hand the prefilled syringe or vial to the doctor for IV push. For a conscious patient, oral glucose or juice is given directly.",
+   hint:"D50W = 50% dextrose IV for unconscious hypoglycemia."},
+  {id:39,cat:"drugs",
+   q:"What drug do you hand for a slow heart rate (bradycardia)?",
+   a:"Atropine vial — the anticholinergic agent used for symptomatic bradycardia. Hand the vial to the doctor.",
+   hint:"Atropine for bradycardia."},
+  {id:40,cat:"drugs",
+   q:"What drug is used for SVT (supraventricular tachycardia)?",
+   a:"Adenosine — given as a rapid IV push with immediate saline flush. Hand the vial to the doctor. Note: this requires a fast push technique.",
+   hint:"Adenosine for SVT. Rapid push required."},
+
+  // ── AIRWAY ────────────────────────────────────────────────
+  {id:50,cat:"airway",
+   q:"How do you size an oral pharyngeal airway (OPA)?",
+   a:"Measure from the corner of the patient's mouth to the earlobe. That length corresponds to the correct OPA size. Have multiple sizes readily available.",
+   hint:"Corner of mouth to earlobe = correct OPA size."},
+  {id:51,cat:"airway",
+   q:"What is the BVM and how should it be set up during sedation?",
+   a:"BVM = Bag-Valve-Mask. It is the primary manual ventilation device. It should be connected to the O2 supply at all times during sedation, with the adult mask attached, ready to use instantly.",
+   hint:"BVM = Bag-Valve-Mask. Connected to O2. Adult mask. Ready at all times."},
+  {id:52,cat:"airway",
+   q:"What is the difference between an LMA and a SAD?",
+   a:"An LMA (Laryngeal Mask Airway) is a type of SAD (Supraglottic Airway Device). Both sit above the vocal cords and provide a supraglottic airway. The doctor places it. Your job is to hand it immediately when called for.",
+   hint:"LMA is a type of SAD — both are supraglottic. Doctor places it, you hand it."},
+  {id:53,cat:"airway",
+   q:"What is the cricothyrotomy kit for and when would it be used?",
+   a:"It is the last-resort emergency surgical airway device — used when the patient cannot be intubated and cannot be oxygenated by any other means. Know exactly where it is and hand it immediately if the doctor calls for it.",
+   hint:"Last resort. Cannot intubate, cannot oxygenate. Know where it is."},
+  {id:54,cat:"airway",
+   q:"What is the laryngoscope kit required to include?",
+   a:"The laryngoscope with blade attached, spare batteries, and spare bulbs. All must be present and the light must be functional. Check it during your pre-case equipment check.",
+   hint:"Laryngoscope + spare batteries + spare bulbs. Check light works."},
+  {id:55,cat:"airway",
+   q:"What is the role of the McGill forceps?",
+   a:"McGill forceps are used to remove a visible foreign object from the airway during laryngoscopy. You should hand them to the doctor immediately during an airway obstruction or aspiration emergency.",
+   hint:"McGill forceps = retrieve visible foreign objects from the airway."},
+  {id:56,cat:"airway",
+   q:"What two suction options are required and what are they each used for?",
+   a:"Tonsil suction (Yankauer) — for clearing the mouth and upper airway. Suction catheter — for deeper, more targeted suctioning. Both must be present with a backup suction unit.",
+   hint:"Tonsil tip (Yankauer) for mouth. Suction catheter for deeper. Plus backup suction unit."},
+
+  // ── EQUIPMENT ─────────────────────────────────────────────
+  {id:60,cat:"equipment",
+   q:"What two monitors must run CONTINUOUSLY throughout every moderate sedation procedure?",
+   a:"1) Pulse oximeter — provides continuous SpO2 (oxygen saturation) and pulse rate. 2) Capnograph — provides continuous ETCO2 (end-tidal CO2) and ventilation monitoring. Both are required for every procedure.",
+   hint:"Pulse ox (SpO2) + capnograph (ETCO2). Both continuous. Every procedure."},
+  {id:61,cat:"equipment",
+   q:"What O2 equipment is required?",
+   a:"A primary positive-pressure O2 delivery system AND a backup O2 system. Both must be functional. You must know how to switch to the backup tank. Full face masks for adults (and pediatric if treating kids) are required.",
+   hint:"Primary O2 + backup O2. Know how to switch tanks. Face masks for adults."},
+  {id:62,cat:"equipment",
+   q:"What is the defibrillator/AED used for and who operates it in an emergency?",
+   a:"The AED/defibrillator analyzes heart rhythm and delivers a shock to restart the heart in ventricular fibrillation (VF) or pulseless VT. Nicole retrieves and operates the AED. You stay at the chair maintaining CPR or assisting the doctor.",
+   hint:"AED for VF/pVT. Nicole runs it. You maintain CPR at the chair."},
+  {id:63,cat:"equipment",
+   q:"What must be present for IV access in the emergency equipment?",
+   a:"Appropriate IV setup including IV catheters (various gauges), IV tubing, appropriate IV fluids (NS or LR), tourniquet, tape, and syringes.",
+   hint:"IV catheters + tubing + fluids + tourniquet + tape + syringes."},
+];
+
+// ═══════════════════════════════════════════════════════════
+//  STATE
+// ═══════════════════════════════════════════════════════════
+let selectedCat = "all";
+let quizDeck    = [];
+let quizIdx     = 0;
+let score       = {correct:0, missed:0, skipped:0};
+let hintVisible = false;
+let revealed    = false;
+
+// ═══════════════════════════════════════════════════════════
+//  INIT
+// ═══════════════════════════════════════════════════════════
+function init() {
+  renderStats();
+  renderCatGrid();
+  renderBrowse();
+}
+
+function renderStats() {
+  const el = document.getElementById('homeStats');
+  const stats = [
+    {num: QA.length,                              lbl: "Total Questions"},
+    {num: QA.filter(q=>q.cat==="emergency").length, lbl: "Emergencies"},
+    {num: QA.filter(q=>q.cat==="drugs").length,   lbl: "Drug Questions"},
+  ];
+  el.innerHTML = stats.map(s=>`
+    <div class="stat-card">
+      <div class="stat-num">${s.num}</div>
+      <div class="stat-lbl">${s.lbl}</div>
+    </div>`).join('');
+}
+
+function renderCatGrid() {
+  const grid = document.getElementById('catGrid');
+  const cats = [
+    {key:"all",      label:"All Topics"},
+    {key:"emergency",label:"🚨 Emergencies"},
+    {key:"drugs",    label:"💊 Drugs"},
+    {key:"airway",   label:"🫁 Airway Kit"},
+    {key:"equipment",label:"🔧 Equipment"},
+    {key:"routine",  label:"📋 Routine Duties"},
+  ];
+  grid.innerHTML = cats.map(c=>{
+    const count = c.key==="all" ? QA.length : QA.filter(q=>q.cat===c.key).length;
+    return `<button class="cat-btn ${selectedCat===c.key?'selected':''}"
+      onclick="selectCat('${c.key}')">
+      ${c.label}
+      <span class="cat-count">${count}</span>
+    </button>`;
+  }).join('');
+}
+
+function selectCat(key) {
+  selectedCat = key;
+  renderCatGrid();
+}
+
+// ═══════════════════════════════════════════════════════════
+//  QUIZ
+// ═══════════════════════════════════════════════════════════
+function shuffle(arr) {
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function startQuiz() {
+  const pool = selectedCat==="all" ? QA : QA.filter(q=>q.cat===selectedCat);
+  quizDeck = shuffle(pool);
+  quizIdx  = 0;
+  score    = {correct:0, missed:0, skipped:0};
+  showPage('quiz');
+  renderCard();
+}
+
+function renderCard() {
+  if(quizIdx >= quizDeck.length){ showResults(); return; }
+  const card = quizDeck[quizIdx];
+  hintVisible = false;
+  revealed    = false;
+
+  const pct = Math.round((quizIdx/quizDeck.length)*100);
+  document.getElementById('progressFill').style.width = pct+'%';
+  document.getElementById('quizCounter').textContent  = `${quizIdx+1} / ${quizDeck.length}`;
+  document.getElementById('quizCatBadge').textContent = CATS[card.cat] || card.cat;
+  document.getElementById('cardHeaderLabel').textContent = `Question ${quizIdx+1}`;
+  document.getElementById('cardQuestion').textContent    = card.q;
+  document.getElementById('hintBox').style.display    = 'none';
+  document.getElementById('hintBox').textContent      = '💡 Hint: '+card.hint;
+  document.getElementById('revealBtn').style.display  = 'block';
+  document.getElementById('answerBox').style.display  = 'none';
+  document.getElementById('verdictRow').style.display = 'none';
+  document.getElementById('verdictLabel').style.display='none';
+  document.getElementById('hintToggle').textContent   = '💡 Show Hint';
+  updateScoreStrip();
+}
+
+function updateScoreStrip() {
+  document.getElementById('sCorrect').textContent = score.correct;
+  document.getElementById('sMissed').textContent  = score.missed;
+  document.getElementById('sSkipped').textContent = score.skipped;
+}
+
+function toggleHint() {
+  if(revealed) return;
+  hintVisible = !hintVisible;
+  const hb = document.getElementById('hintBox');
+  hb.style.display = hintVisible ? 'block' : 'none';
+  document.getElementById('hintToggle').textContent = hintVisible ? '🙈 Hide Hint' : '💡 Show Hint';
+}
+
+function revealAnswer() {
+  revealed = true;
+  const card = quizDeck[quizIdx];
+  document.getElementById('hintBox').style.display   = 'none';
+  document.getElementById('revealBtn').style.display = 'none';
+  document.getElementById('answerBox').style.display = 'block';
+  document.getElementById('answerBox').textContent   = card.a;
+  document.getElementById('verdictRow').style.display= 'flex';
+  document.getElementById('verdictLabel').style.display='block';
+  document.getElementById('hintToggle').style.display='none';
+}
+
+function record(result) {
+  score[result]++;
+  quizIdx++;
+  document.getElementById('hintToggle').style.display='block';
+  renderCard();
+}
+
+function showResults() {
+  const total = quizDeck.length;
+  const pct   = Math.round((score.correct/total)*100);
+  document.getElementById('resCor').textContent = score.correct;
+  document.getElementById('resMis').textContent = score.missed;
+  document.getElementById('resSki').textContent = score.skipped;
+  const pctEl = document.getElementById('resPct');
+  pctEl.textContent = pct+'%';
+  pctEl.className = 'results-pct '+(pct>=90?'pct-great':pct>=75?'pct-ok':'pct-low');
+  document.getElementById('resEmoji').textContent = pct>=90?'🏆':pct>=75?'✅':'📖';
+  document.getElementById('resGrade').textContent = pct>=90?'Excellent — you\'re ready!':pct>=75?'Good — review what you missed':'Keep drilling — you\'ve got this';
+  showPage('results');
+}
+
+// ═══════════════════════════════════════════════════════════
+//  BROWSE
+// ═══════════════════════════════════════════════════════════
+let openId = null;
+function renderBrowse() {
+  const search = (document.getElementById('searchInput')||{}).value?.toLowerCase()||'';
+  const filter = (document.getElementById('filterSelect')||{}).value||'all';
+  const filtered = QA.filter(q=>
+    (filter==='all'||q.cat===filter) &&
+    (search===''||q.q.toLowerCase().includes(search)||q.a.toLowerCase().includes(search))
+  );
+  document.getElementById('browseCount').textContent = `${filtered.length} question${filtered.length!==1?'s':''}`;
+  document.getElementById('browseList').innerHTML = filtered.map(item=>`
+    <div class="qa-item ${openId===item.id?'open':''}" id="qa-${item.id}">
+      <button class="qa-toggle" onclick="toggleQA(${item.id})">
+        <div class="qa-q-wrap">
+          <span class="qa-cat-badge">${CATS[item.cat]||item.cat}</span>
+          <div class="qa-q-text">${item.q}</div>
+        </div>
+        <span class="qa-chevron">${openId===item.id?'▲':'▼'}</span>
+      </button>
+      ${openId===item.id?`
+      <div class="qa-answer">
+        <div class="qa-answer-box">${item.a}</div>
+        <div class="qa-hint-box">💡 <strong>Hint:</strong> ${item.hint}</div>
+      </div>`:''}
+    </div>`).join('');
+}
+
+function toggleQA(id) {
+  openId = openId===id ? null : id;
+  renderBrowse();
+}
+
+// ═══════════════════════════════════════════════════════════
+//  NAV
+// ═══════════════════════════════════════════════════════════
+function showPage(name) {
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  const tab = document.querySelector(`.nav-tab[onclick="showPage('${name}')"]`);
+  if(tab) tab.classList.add('active');
+  window.scrollTo(0,0);
+}
+
+init();
+</script>
+</body>
+</html>
